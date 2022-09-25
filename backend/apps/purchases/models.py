@@ -10,8 +10,14 @@ class Purchase(DateModel):
     typePayment = models.CharField(max_length=200, null=True)
     note = models.CharField(max_length=500, null=True)
 
+    class Meta:
+        ordering = ["-created"]
+
 class DetailedPurchase(DateModel):
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     productName = models.CharField(max_length=200)
     amount = models.FloatField()
     price = models.FloatField()
+
+    class Meta:
+        ordering = ["-created"]

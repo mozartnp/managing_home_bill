@@ -1,4 +1,4 @@
-from django.views.generic import CreateView
+from django.views.generic import CreateView, ListView
 from django.urls import reverse_lazy
 
 from backend.apps.purchases.models import Purchase
@@ -11,4 +11,12 @@ class AddingPurchaseCreateView(CreateView):
     model = Purchase
     template_name = 'purchases/adding_purchase.html'
     form_class = AddingPurchaseForms
-    success_url = reverse_lazy('core:dashboard') #TODO arrumar o redirecionamento
+    success_url = reverse_lazy('core:listing_purchase')
+
+class ListingPurchasesListView(ListView):
+    """
+    Class View do listing all Purchases
+    """
+    model = Purchase
+    template_name = 'purchases/listing_purchases.html'
+    paginate_by = 10
