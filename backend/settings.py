@@ -1,6 +1,8 @@
 from pathlib import Path
 from decouple import Csv, config
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,6 +23,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 3 Party Apps
+    'widget_tweaks',
 
     # System Apps
     'backend.apps.customUser',
@@ -111,4 +116,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default model of User
 AUTH_USER_MODEL = 'customUser.CustomUser'
-# LOGIN_REDIRECT_URL = reverse_lazy('core:dashboard') TODO Arrumar para onde vai
+LOGIN_REDIRECT_URL = reverse_lazy('core:dashboard')

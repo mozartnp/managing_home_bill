@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+/* Estilo para Login */
+main {
+  background-color:#f5f5f5;
+}
+
+.login-input .form-group {
+  margin-bottom: 30px; 
+}
+  .login-input .form-group label {
+    color: #505F76;
+    font-size: 15px; 
+  }
+  .login-input .form-group .form-control {
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid #f5f5f5;
+    padding-left: 0;
+    color: #7A88A1; 
+  }
+
+.card-login {
+  width: 500px;
+  height: 400px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+  overflow: auto;
+  display: table;
+}
+
+.card-login-in{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* FIM Estilo para Login */

@@ -1,0 +1,48 @@
+<!--Para avisar que a pagina é uma extenção da base.html-->
+{% extends 'base.html' %}
+
+<!--Para carregar os arquivos estaticos na pagina.-->
+{% load static %}
+
+<!--Para carregar o widget tweaks na pagina.-->
+{% load widget_tweaks %}
+
+<!--Bloco que define o titulo na pagina-->
+{% block title %}Login{% endblock %}
+
+<!--Bloco que define o estilos extra na pagina-->
+{% block extra_style %}
+<link rel="stylesheet" href="{% static '/style/login_style.css' %}"/>
+{% endblock %}
+
+<!--Para indicar qual bloco será inserida no base.html-->
+{% block content %}
+
+<main>
+
+    <div class="container min-vh-100 ">
+
+        <section class ="card-login">
+            <div class="card-light card-login-in shadow-lg rounded p-4">
+                <form method="post" class="row login-input" >
+                    <h4 class="text-center">Gerenciador de contas da casa</h4>
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field|add_class:"form-control" }}
+                        </div>
+                    {% endfor %}
+                    {{ form.non_field_errors }}
+                    <div class="col-sm-12">
+                        <button class="w-100 btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </div>
+
+</main>
+
+{% endblock %}
