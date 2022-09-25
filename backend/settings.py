@@ -14,12 +14,16 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 # Application definition
 
 INSTALLED_APPS = [
+    #Django Apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # System Apps
+    'backend.apps.customUser',
 ]
 
 MIDDLEWARE = [
@@ -103,3 +107,7 @@ STATIC_URL = 'static/'
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Default model of User
+AUTH_USER_MODEL = 'customUser.CustomUser'
+# LOGIN_REDIRECT_URL = reverse_lazy('core:dashboard') TODO Arrumar para onde vai
