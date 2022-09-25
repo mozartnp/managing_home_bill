@@ -10,14 +10,14 @@
         <div id="sideBar" class="sidenav open">
 
             <div class="container-fluid">
-                <a class="collapse-choice" href="">Home</a>
+                <a class="collapse-choice" href="{% url 'core:dashboard' %}">Dashboard</a>
                 
-                <a class="collapse-choice" data-bs-toggle="collapse" href="#collapseColaboradores" aria-expanded="false"
-                    aria-controls="collapseColaboradores">
-                    Colaboradores
+                <a class="collapse-choice" data-bs-toggle="collapse" href="#collapsePurchases" aria-expanded="false"
+                    aria-controls="collapsePurchases">
+                    Compras
                 </a>
-                <div class="collapse" id="collapseColaboradores">
-                    <a class="collapse-option" href="">Funções</a>
+                <div class="collapse" id="collapsePurchases">
+                    <a class="collapse-option" href="{% url 'core:adding_purchase' %}">Nova Compra</a>
                     <hr>
                 </div>
 

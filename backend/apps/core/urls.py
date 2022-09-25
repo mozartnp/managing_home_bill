@@ -4,6 +4,7 @@ from django.views.generic.base import RedirectView
 
 from backend.apps.core.views.userViews import LoginCustomView
 from backend.apps.core.views.basicViews import DashboardView
+from backend.apps.core.views.purchasesViews import AddingPurchaseCreateView
 
 
 app_name = 'core'
@@ -15,4 +16,6 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(next_page=reverse_lazy('core:login_custom')), name='logout_custom'),
 
     path('dashboard/', DashboardView.as_view(), name='dashboard'),
+
+    path('purchases/addingPurchase/', AddingPurchaseCreateView.as_view(), name='adding_purchase' )
 ]

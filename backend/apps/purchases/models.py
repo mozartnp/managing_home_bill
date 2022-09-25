@@ -6,7 +6,7 @@ class Purchase(DateModel):
     purchaseName = models.CharField(max_length=200)
     placePurchase = models.CharField(max_length=200, null=True)
     isDetailedPurchase = models.BooleanField()
-    purchaseValue = models.FloatField()
+    purchaseValue = models.FloatField(null=True)
     typePayment = models.CharField(max_length=200, null=True)
     note = models.CharField(max_length=500, null=True)
 
