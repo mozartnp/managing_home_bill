@@ -24,6 +24,7 @@ INSTALLED_APPS = [
 
     # System Apps
     'backend.apps.customUser',
+    'backend.apps.core',
 ]
 
 MIDDLEWARE = [
