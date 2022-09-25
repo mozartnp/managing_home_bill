@@ -1,0 +1,54 @@
+<!--Para avisar que a pagina é uma extenção da base.html-->
+{% extends 'base.html' %}
+
+<!--Para carregar os arquivos estaticos na pagina.-->
+{% load static %}
+
+<!--Para carregar o widget tweaks na pagina.-->
+{% load widget_tweaks %}
+
+<!--Bloco que define o titulo na pagina-->
+{% block title %}Compra {{ object.purchaseName }}{% endblock %}
+
+<!--Para indicar qual bloco será inserida no base.html-->
+{% block content %}
+
+{% include 'partials/_sidebar.html' %}
+<main>
+    <div id="conteudo">
+        <div class="container-fluid">
+            <div class="container">
+        
+                <section>
+                    <h2 class="text-center"> Edição da Compra: {{ object.purchaseName }}</h2>
+                    <form method="POST" class="row justify-content-center" action=".">
+                        {% csrf_token %}
+                        {% for field in form.visible_fields %}
+                            {% if field.name == "isDetailedPurchase" %}
+                            <div class="form-group col-sm-5">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field|add_class:"form-check" }}
+                            </div>
+                            {% else %}
+                            <div class="form-group col-sm-5">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field|add_class:"form-control" }}
+                            </div>
+                            {% endif %}
+                            
+                        {% endfor %}
+                        {{ form.errors }}
+                        <div class="col-sm-5">
+                            <button class="w-100 btn btn-outline-success" type="submit">Salvar Compra</button>
+                        </div>
+                    </form>
+                </section>
+
+            </div>
+        </div>
+    </div> 
+        
+
+</main>
+
+{% endblock %}
