@@ -28,8 +28,9 @@ INSTALLED_APPS = [
     'widget_tweaks',
 
     # System Apps
-    'backend.apps.customUser',
     'backend.apps.core',
+    'backend.apps.customUser',
+    'backend.apps.purchases',
 ]
 
 MIDDLEWARE = [
