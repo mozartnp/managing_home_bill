@@ -1,6 +1,6 @@
 *       
   /* Estilo para o botão sanduiche */
-  #botaoSideBar {
+  #buttonSideBar {
       margin-left: 125px;
       position: fixed;
       top: 20px;
@@ -16,7 +16,7 @@
       color: white;
   }
 
-  #botaoSideBar:hover {
+  #buttonSideBar:hover {
       background-color: black;
   }
 
@@ -35,7 +35,7 @@
   }
 
   /* Estilo do menu do sidebar */
-  .collapse-escolha {
+  .collapse-choice {
       padding: 8px 5px 5px 10px;
       text-decoration: none;
       color: black;
@@ -43,11 +43,11 @@
       font-size: 20px;
   }
 
-  .collapse-escolha:hover {
+  .collapse-choice:hover {
       color: #f1f1f1;
   }
 
-  .collapse-opcoes {
+  .collapse-option {
       padding: 1px 1px 2px 20px;
       text-decoration: none;
       color: black;
@@ -55,7 +55,7 @@
       font-size: 18px;
   }
 
-  .collapse-opcoes:hover {
+  .collapse-option:hover {
       color: #f1f1f1;
   }
 

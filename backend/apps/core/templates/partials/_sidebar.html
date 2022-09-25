@@ -7,24 +7,27 @@
 {% endblock %}
 
     <nav>
-        <div id="sideBar" class="sidenav aberto">
+        <div id="sideBar" class="sidenav open">
 
             <div class="container-fluid">
-                <a class="collapse-escolha" href="">Home</a>
+                <a class="collapse-choice" href="">Home</a>
                 
-                <a class="collapse-escolha" data-bs-toggle="collapse" href="#collapseColaboradores" aria-expanded="false"
+                <a class="collapse-choice" data-bs-toggle="collapse" href="#collapseColaboradores" aria-expanded="false"
                     aria-controls="collapseColaboradores">
                     Colaboradores
                 </a>
                 <div class="collapse" id="collapseColaboradores">
-                    <a class="collapse-opcoes" href="">Funções</a>
+                    <a class="collapse-option" href="">Funções</a>
                     <hr>
                 </div>
+
+                <a class="collapse-choice" href="{% url 'core:logout_custom' %}">Logout</a>
+
             </div>
     
         </div>
     
-        <button onclick="manipularNav()" class="btn shadow-none" id="botaoSideBar">
+        <button onclick="manipularNav()" class="btn shadow-none" id="buttonSideBar">
             <svg width="16" height="16">
                 <use href="{% static 'bootstrap/icons/list.svg' %}#listsvg"></use>
             </svg>
