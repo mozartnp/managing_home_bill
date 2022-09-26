@@ -2,19 +2,25 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
 from django.urls import reverse_lazy, reverse
 
+from backend.apps.core.mixins import LoginRequiredCustomMixin
 from backend.apps.purchases.models import DetailedPurchase, Purchase
 from backend.apps.purchases.forms import AddingPurchaseForms, UpdatePurchaseForms, AddingDetailedPurchaseForms, UpdateDetailedPurchaseForms
 
-class AddingPurchaseCreateView(CreateView):
+class AddingPurchaseCreateView(LoginRequiredCustomMixin, CreateView):
     """
     Class View to create a new Purchase
     """
     model = Purchase
     template_name = 'purchases/adding_purchase.html'
     form_class = AddingPurchaseForms
-    success_url = reverse_lazy('core:listing_purchase')
 
-class ListingPurchasesListView(ListView):
+    def get_success_url(self):
+        if self.request.method == "POST":
+            if self.request.POST.get('isDetailedPurchase') == 'on':
+                return reverse('core:listing_detailed_purchase', kwargs={"pk" : self.object.pk})
+        return reverse_lazy('core:listing_purchase')
+
+class ListingPurchasesListView(LoginRequiredCustomMixin, ListView):
     """
     Class View to listing all Purchases
     """
@@ -22,7 +28,7 @@ class ListingPurchasesListView(ListView):
     template_name = 'purchases/listing_purchases.html'
     paginate_by = 10
 
-class UpdatePurchaseUpdateView(UpdateView):
+class UpdatePurchaseUpdateView(LoginRequiredCustomMixin, UpdateView):
     """
     Class View to update a Purchase
     """
@@ -31,7 +37,7 @@ class UpdatePurchaseUpdateView(UpdateView):
     form_class = UpdatePurchaseForms
     success_url = reverse_lazy('core:listing_purchase')
 
-class AddingDetailedPurchaseCreateView(CreateView):
+class AddingDetailedPurchaseCreateView(LoginRequiredCustomMixin, CreateView):
     """
     Class View to create a new Detailed Purchase
     """
@@ -47,7 +53,7 @@ class AddingDetailedPurchaseCreateView(CreateView):
         context['purchase_pk'] = self.kwargs['pk']
         return context
 
-class ListingDetailedPurchasesListView(ListView):
+class ListingDetailedPurchasesListView(LoginRequiredCustomMixin, ListView):
     """
     Class View to listing all Detailed Purchases
     """
@@ -64,7 +70,7 @@ class ListingDetailedPurchasesListView(ListView):
         self.purchase = get_object_or_404(Purchase, pk=self.kwargs['pk'])
         return DetailedPurchase.objects.filter(purchase=self.purchase)
 
-class UpdateDetailedPurchaseUpdateView(UpdateView):
+class UpdateDetailedPurchaseUpdateView(LoginRequiredCustomMixin, UpdateView):
     """
     Class View to update a Detailed Purchase
     """

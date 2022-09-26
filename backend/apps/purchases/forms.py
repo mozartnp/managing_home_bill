@@ -18,7 +18,7 @@ class AddingPurchaseForms(forms.ModelForm):
             'purchaseValue' : 'Valor da compra'
         }
         widgets= {
-            "isDetailedPurchase" : forms.CheckboxInput(),
+            "isDetailedPurchase" : forms.CheckboxInput(attrs={"onclick": "checkisDetailedPurchase()"}),
             'purchaseName' : forms.TextInput(attrs={'placeholder': 'Digite o nome da compra'}),
             'placePurchase' : forms.TextInput(attrs={'placeholder': 'Digite o local de compra'}),
             'typePayment' : forms.TextInput(attrs={'placeholder': 'Digite o tipo de pagamento'}),
@@ -50,7 +50,7 @@ class UpdatePurchaseForms(forms.ModelForm):
             'purchaseValue' : 'Valor da compra'
         }
         widgets= {
-            "isDetailedPurchase" : forms.CheckboxInput(),
+            "isDetailedPurchase" : forms.CheckboxInput(attrs={"onclick": "checkisDetailedPurchase()"}),
             'purchaseName' : forms.TextInput(attrs={'placeholder': 'Digite o nome da compra'}),
             'placePurchase' : forms.TextInput(attrs={'placeholder': 'Digite o local de compra'}),
             'typePayment' : forms.TextInput(attrs={'placeholder': 'Digite o tipo de pagamento'}),
@@ -80,9 +80,7 @@ class AddingDetailedPurchaseForms(forms.ModelForm):
             'price' : 'Preço'
         }
         widgets= {
-            'productName' : forms.TextInput(attrs={'placeholder': 'Digite o nome da compra'}),
-            'amount' : forms.TextInput(attrs={'placeholder': 'Digite o local de compra'}),
-            'price' : forms.TextInput(attrs={'placeholder': 'Digite o tipo de pagamento'}),
+            'productName' : forms.TextInput(attrs={'placeholder': 'Digite o nome do produto'})
         }
 
     def __init__(self, *args, **kwargs):
@@ -103,9 +101,7 @@ class UpdateDetailedPurchaseForms(forms.ModelForm):
             'price' : 'Preço'
         }
         widgets= {
-            'productName' : forms.TextInput(attrs={'placeholder': 'Digite o nome da compra'}),
-            'amount' : forms.TextInput(attrs={'placeholder': 'Digite o local de compra'}),
-            'price' : forms.TextInput(attrs={'placeholder': 'Digite o tipo de pagamento'}),
+            'productName' : forms.TextInput(attrs={'placeholder': 'Digite o nome do produto'})
         }
 
     def __init__(self, *args, **kwargs):

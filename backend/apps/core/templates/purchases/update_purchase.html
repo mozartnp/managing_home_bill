@@ -35,6 +35,11 @@
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
                                 {{ field|add_class:"form-check" }}
                             </div>
+                            {% elif field.name == "purchaseValue" and form.isDetailedPurchase.value is True %}
+                            <div class="form-group col-sm-5">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field|append_attr:"disabled:"|add_class:"form-control"}}
+                            </div>
                             {% else %}
                             <div class="form-group col-sm-5">
                                 <label for="{{ field.id_for_label }}">{{ field.label }}</label>
@@ -57,4 +62,8 @@
 
 </main>
 
+{% endblock %}
+
+{% block extra_script %}
+<script src="{% static '/js/isDetailedPurchase_check.js' %}"></script>
 {% endblock %}
