@@ -89,3 +89,27 @@ class AddingDetailedPurchaseForms(forms.ModelForm):
         super(AddingDetailedPurchaseForms, self).__init__(*args, **kwargs)
         self.fields['amount'].required = False
         self.fields['price'].required = False
+
+class UpdateDetailedPurchaseForms(forms.ModelForm):
+
+    class Meta:
+        model = DetailedPurchase
+        fields = [
+            'productName', 'amount', 'price'
+        ]
+        labels = {
+            'productName' : 'Nome do Produto',
+            'amount' : 'Quantidade',
+            'price' : 'Preço'
+        }
+        widgets= {
+            'productName' : forms.TextInput(attrs={'placeholder': 'Digite o nome da compra'}),
+            'amount' : forms.TextInput(attrs={'placeholder': 'Digite o local de compra'}),
+            'price' : forms.TextInput(attrs={'placeholder': 'Digite o tipo de pagamento'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(UpdateDetailedPurchaseForms, self).__init__(*args, **kwargs)
+        self.fields['productName'].required = False
+        self.fields['amount'].required = False
+        self.fields['price'].required = False

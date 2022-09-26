@@ -29,7 +29,7 @@
                     <h2 class="text-center"> Lista de todos os produtos da compra: </h2>
                     <ul>
                         {% for object in object_list %}
-                            <a href="">{{ object.productName }}</a>
+                            <a href="{% url 'core:update_detailed_purchase' object.pk %}">{{ object.productName }}</a>
                             <hr/>
                             {% empty %}
                                 <li>No objects yet.</li>

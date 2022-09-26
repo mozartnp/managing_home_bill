@@ -6,9 +6,8 @@ from backend.apps.core.views.userViews import LoginCustomView
 from backend.apps.core.views.basicViews import DashboardView
 from backend.apps.core.views.purchasesViews import (
     AddingPurchaseCreateView, ListingPurchasesListView, UpdatePurchaseUpdateView,
-    AddingDetailedPurchaseCreateView, ListingDetailedPurchasesListView
+    AddingDetailedPurchaseCreateView, ListingDetailedPurchasesListView, UpdateDetailedPurchaseUpdateView
 )
-
 
 app_name = 'core'
 
@@ -26,5 +25,6 @@ urlpatterns = [
 
     path('purchases/addingDetailedPurchase/<pk>/', AddingDetailedPurchaseCreateView.as_view(), name='adding_detailed_purchase'),
     path('purchases/listingDetailedPurchase/<pk>/', ListingDetailedPurchasesListView.as_view(), name='listing_detailed_purchase'),
+    path('purchases/updateDetailedPurchase/<pk>/', UpdateDetailedPurchaseUpdateView.as_view(), name='update_detailed_purchase')
     
 ]
