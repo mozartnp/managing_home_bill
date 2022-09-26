@@ -1,6 +1,6 @@
 from django import forms
 
-from backend.apps.purchases.models import Purchase
+from backend.apps.purchases.models import DetailedPurchase, Purchase
 
 class AddingPurchaseForms(forms.ModelForm):
 
@@ -65,3 +65,27 @@ class UpdatePurchaseForms(forms.ModelForm):
         self.fields['purchaseValue'].required = False
         self.fields['typePayment'].required = False
         self.fields['note'].required = False
+
+class AddingDetailedPurchaseForms(forms.ModelForm):
+    purchase = forms.ModelChoiceField(queryset=Purchase.objects.all(), widget=forms.HiddenInput())
+
+    class Meta:
+        model = DetailedPurchase
+        fields = [
+            'productName', 'amount', 'price', 'purchase'
+        ]
+        labels = {
+            'productName' : 'Nome do Produto',
+            'amount' : 'Quantidade',
+            'price' : 'Preço'
+        }
+        widgets= {
+            'productName' : forms.TextInput(attrs={'placeholder': 'Digite o nome da compra'}),
+            'amount' : forms.TextInput(attrs={'placeholder': 'Digite o local de compra'}),
+            'price' : forms.TextInput(attrs={'placeholder': 'Digite o tipo de pagamento'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AddingDetailedPurchaseForms, self).__init__(*args, **kwargs)
+        self.fields['amount'].required = False
+        self.fields['price'].required = False

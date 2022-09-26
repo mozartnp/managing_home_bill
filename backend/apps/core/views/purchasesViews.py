@@ -1,8 +1,9 @@
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 
-from backend.apps.purchases.models import Purchase
-from backend.apps.purchases.forms import AddingPurchaseForms, UpdatePurchaseForms
+from backend.apps.purchases.models import DetailedPurchase, Purchase
+from backend.apps.purchases.forms import AddingPurchaseForms, UpdatePurchaseForms, AddingDetailedPurchaseForms
 
 class AddingPurchaseCreateView(CreateView):
     """
@@ -29,3 +30,36 @@ class UpdatePurchaseUpdateView(UpdateView):
     template_name = 'purchases/update_purchase.html'
     form_class = UpdatePurchaseForms
     success_url = reverse_lazy('core:listing_purchase')
+
+class AddingDetailedPurchaseCreateView(CreateView):
+    """
+    Class View to create a new Detailed Purchase
+    """
+    model = DetailedPurchase
+    template_name = 'purchases/adding_detailed_purchase.html'
+    form_class = AddingDetailedPurchaseForms
+
+    def get_success_url(self):
+        return reverse('core:listing_detailed_purchase', kwargs={"pk" : self.kwargs['pk']})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['purchase_pk'] = self.kwargs['pk']
+        return context
+
+class ListingDetailedPurchasesListView(ListView):
+    """
+    Class View to listing all Detailed Purchases
+    """
+    model = DetailedPurchase
+    template_name = 'purchases/listing_detailed_purchases.html'
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['purchase_pk'] = self.kwargs['pk']
+        return context
+
+    def get_queryset(self):
+        self.purchase = get_object_or_404(Purchase, pk=self.kwargs['pk'])
+        return DetailedPurchase.objects.filter(purchase=self.purchase)

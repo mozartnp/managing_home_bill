@@ -8,7 +8,7 @@
 {% load widget_tweaks %}
 
 <!--Bloco que define o titulo na pagina-->
-{% block title %}Compra {{ object.purchaseName }}{% endblock %}
+{% block title %}Nova Compra{% endblock %}
 
 <!--Para indicar qual bloco será inserida no base.html-->
 {% block content %}
@@ -18,15 +18,9 @@
     <div id="conteudo">
         <div class="container-fluid">
             <div class="container">
-
-                <section class="row justify-content-start" >
-                    <div class="offset-sm-4 col-sm-4">
-                        <a class=" mb-2 w-100 btn btn-outline-primary" href="{% url 'core:listing_detailed_purchase' object.pk %}" role="button">Lista de produtos</a>
-                    </div>
-                </section>
-        
+                
                 <section>
-                    <h2 class="text-center"> Edição da Compra: {{ object.purchaseName }}</h2>
+                    <h2 class="text-center"> Adicionar Novo Produto</h2>
                     <form method="POST" class="row justify-content-center" action=".">
                         {% csrf_token %}
                         {% for field in form.visible_fields %}
@@ -44,8 +38,9 @@
                             
                         {% endfor %}
                         {{ form.errors }}
+                        <input type="hidden" name="purchase" value="{{ purchase_pk }}" id="id_purchase" />
                         <div class="col-sm-5">
-                            <button class="mt-2 w-100 btn btn-outline-success" type="submit">Atualizar Compra</button>
+                            <button class="mt-2 w-100 btn btn-outline-success" type="submit">Salvar Compra</button>
                         </div>
                     </form>
                 </section>

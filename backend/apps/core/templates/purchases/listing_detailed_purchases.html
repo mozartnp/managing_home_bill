@@ -1,0 +1,49 @@
+<!--Para avisar que a pagina é uma extenção da base.html-->
+{% extends 'base.html' %}
+
+<!--Para carregar os arquivos estaticos na pagina.-->
+{% load static %}
+
+<!--Para carregar o widget tweaks na pagina.-->
+{% load widget_tweaks %}
+
+<!--Bloco que define o titulo na pagina-->
+{% block title %}Lista de Compras{% endblock %}
+
+<!--Para indicar qual bloco será inserida no base.html-->
+{% block content %}
+
+{% include 'partials/_sidebar.html' %}
+<main>
+    <div id="conteudo">
+        <div class="container-fluid">
+            <div class="container">
+
+                <section class="row justify-content-start" >
+                    <div class="offset-sm-4 col-sm-4">
+                        <a class=" mb-2 w-100 btn btn-outline-primary" href="{% url 'core:adding_detailed_purchase' purchase_pk %}" role="button">Adicionar novo produto</a>
+                    </div>
+                </section>
+
+                <section>
+                    <h2 class="text-center"> Lista de todos os produtos da compra: </h2>
+                    <ul>
+                        {% for object in object_list %}
+                            <a href="">{{ object.productName }}</a>
+                            <hr/>
+                            {% empty %}
+                                <li>No objects yet.</li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+                {% include 'partials/_paginator.html' %}
+                
+            </div>
+        </div>
+    </div> 
+        
+
+</main>
+
+{% endblock %}

@@ -4,7 +4,10 @@ from django.views.generic.base import RedirectView
 
 from backend.apps.core.views.userViews import LoginCustomView
 from backend.apps.core.views.basicViews import DashboardView
-from backend.apps.core.views.purchasesViews import AddingPurchaseCreateView, ListingPurchasesListView, UpdatePurchaseUpdateView
+from backend.apps.core.views.purchasesViews import (
+    AddingPurchaseCreateView, ListingPurchasesListView, UpdatePurchaseUpdateView,
+    AddingDetailedPurchaseCreateView, ListingDetailedPurchasesListView
+)
 
 
 app_name = 'core'
@@ -19,6 +22,9 @@ urlpatterns = [
 
     path('purchases/addingPurchase/', AddingPurchaseCreateView.as_view(), name='adding_purchase'),
     path('purchases/listingPurchase/', ListingPurchasesListView.as_view(), name='listing_purchase'),
-    path('purchases/updatePurchase/<pk>/', UpdatePurchaseUpdateView.as_view(), name='update_purchase')
+    path('purchases/updatePurchase/<pk>/', UpdatePurchaseUpdateView.as_view(), name='update_purchase'),
+
+    path('purchases/addingDetailedPurchase/<pk>/', AddingDetailedPurchaseCreateView.as_view(), name='adding_detailed_purchase'),
+    path('purchases/listingDetailedPurchase/<pk>/', ListingDetailedPurchasesListView.as_view(), name='listing_detailed_purchase'),
     
 ]

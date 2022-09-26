@@ -16,7 +16,7 @@ class Purchase(DateModel):
 class DetailedPurchase(DateModel):
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     productName = models.CharField(max_length=200)
-    amount = models.FloatField()
+    amount = models.FloatField(default=1)
     price = models.FloatField()
 
     class Meta:
