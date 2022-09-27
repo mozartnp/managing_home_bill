@@ -86,7 +86,6 @@ class AddingDetailedPurchaseForms(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AddingDetailedPurchaseForms, self).__init__(*args, **kwargs)
         self.fields['amount'].required = False
-        self.fields['price'].required = False
 
 class UpdateDetailedPurchaseForms(forms.ModelForm):
 
