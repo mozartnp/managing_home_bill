@@ -6,6 +6,7 @@ class AddingPurchaseForms(forms.ModelForm):
 
     class Meta:
         model = Purchase
+        localized_fields = ('purchaseValue',)
         fields = [
             'purchaseName', 'placePurchase', 'isDetailedPurchase', 'purchaseValue', 'typePayment', 'note'
         ]
@@ -38,6 +39,7 @@ class UpdatePurchaseForms(forms.ModelForm):
 
     class Meta:
         model = Purchase
+        localized_fields = ('purchaseValue',)
         fields = [
             'purchaseName', 'placePurchase', 'isDetailedPurchase', 'purchaseValue', 'typePayment', 'note'
         ]
@@ -71,6 +73,7 @@ class AddingDetailedPurchaseForms(forms.ModelForm):
 
     class Meta:
         model = DetailedPurchase
+        localized_fields = ('amount','price',)
         fields = [
             'productName', 'amount', 'price', 'purchase'
         ]
@@ -91,6 +94,7 @@ class UpdateDetailedPurchaseForms(forms.ModelForm):
 
     class Meta:
         model = DetailedPurchase
+        localized_fields = ('amount','price',)
         fields = [
             'productName', 'amount', 'price'
         ]
