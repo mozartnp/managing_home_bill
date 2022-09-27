@@ -13,6 +13,9 @@ class Purchase(DateModel):
     class Meta:
         ordering = ["-created"]
 
+    def __str__(self):
+        return f"{self.purchaseName} {self.created}"
+
 class DetailedPurchase(DateModel):
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
     productName = models.CharField(max_length=200)
@@ -21,3 +24,7 @@ class DetailedPurchase(DateModel):
 
     class Meta:
         ordering = ["-created"]
+
+    def __str__(self):
+            return f"{self.productName} / {self.purchase}"
+    
