@@ -4,6 +4,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
 
+class TeamModel(models.Model):
+    name = models.CharField(max_length=254)
+
+    def __str__(self):
+        return self.name
+
 class CustomUserManager(BaseUserManager):
     '''
     Class to create a user
@@ -39,13 +45,17 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-class CustomUser(AbstractBaseUser):
+class CustomUserModels(AbstractBaseUser):
     '''
     Model to create a custom user on django
     '''
     id_user = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     full_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=254, unique=True)
+    team = models.ManyToManyField(
+        TeamModel,
+        through='MembersModel'
+    )
     date_joined = models.DateTimeField(auto_now_add=True)
     last_login = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -66,3 +76,10 @@ class CustomUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+class MembersModel(models.Model):
+    user = models.ForeignKey(CustomUserModels, on_delete=models.CASCADE)
+    team = models.ForeignKey(TeamModel, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} member to {self.team}"

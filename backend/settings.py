@@ -116,5 +116,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default model of User
-AUTH_USER_MODEL = 'customUser.CustomUser'
+AUTH_USER_MODEL = 'customUser.CustomUserModels'
 LOGIN_REDIRECT_URL = reverse_lazy('core:dashboard')
