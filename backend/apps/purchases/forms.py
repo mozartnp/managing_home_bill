@@ -1,14 +1,24 @@
 from django import forms
 
 from backend.apps.purchases.models import DetailedPurchase, Purchase
+from backend.apps.customUser.models import CustomUserModels, TeamModel
 
 class AddingPurchaseForms(forms.ModelForm):
+    user = forms.ModelChoiceField(queryset=CustomUserModels.objects.all(), widget=forms.HiddenInput())
+    team = forms.ModelChoiceField(queryset=TeamModel.objects.all(), widget=forms.HiddenInput()) 
 
     class Meta:
         model = Purchase
         localized_fields = ('purchaseValue',)
         fields = [
-            'purchaseName', 'placePurchase', 'isDetailedPurchase', 'purchaseValue', 'typePayment', 'note'
+            'purchaseName',
+            'placePurchase',
+            'isDetailedPurchase',
+            'purchaseValue',
+            'typePayment',
+            'note',
+            'user',
+            'team'
         ]
         labels = {
             'purchaseName' : 'Compra',
@@ -41,7 +51,12 @@ class UpdatePurchaseForms(forms.ModelForm):
         model = Purchase
         localized_fields = ('purchaseValue',)
         fields = [
-            'purchaseName', 'placePurchase', 'isDetailedPurchase', 'purchaseValue', 'typePayment', 'note'
+            'purchaseName',
+            'placePurchase',
+            'isDetailedPurchase',
+            'purchaseValue',
+            'typePayment',
+            'note'
         ]
         labels = {
             'purchaseName' : 'Compra',
@@ -70,12 +85,19 @@ class UpdatePurchaseForms(forms.ModelForm):
 
 class AddingDetailedPurchaseForms(forms.ModelForm):
     purchase = forms.ModelChoiceField(queryset=Purchase.objects.all(), widget=forms.HiddenInput())
+    user = forms.ModelChoiceField(queryset=CustomUserModels.objects.all(), widget=forms.HiddenInput())
+    team = forms.ModelChoiceField(queryset=TeamModel.objects.all(), widget=forms.HiddenInput()) 
 
     class Meta:
         model = DetailedPurchase
         localized_fields = ('amount','price',)
         fields = [
-            'productName', 'amount', 'price', 'purchase'
+            'productName',
+            'amount',
+            'price',
+            'purchase', #TODO ? Preciso do campo que está como hiddeninput aqui?
+            'user',
+            'team'
         ]
         labels = {
             'productName' : 'Nome do Produto',
@@ -96,7 +118,9 @@ class UpdateDetailedPurchaseForms(forms.ModelForm):
         model = DetailedPurchase
         localized_fields = ('amount','price',)
         fields = [
-            'productName', 'amount', 'price'
+            'productName',
+            'amount',
+            'price'
         ]
         labels = {
             'productName' : 'Nome do Produto',

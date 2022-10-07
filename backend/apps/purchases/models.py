@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
 
+from backend.apps.customUser.models import TeamModel
 from backend.apps.core.models import DateModel
 
 class Purchase(DateModel):
@@ -9,6 +11,8 @@ class Purchase(DateModel):
     purchaseValue = models.FloatField(null=True)
     typePayment = models.CharField(max_length=200, null=True)
     note = models.CharField(max_length=500, null=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    team = models.ForeignKey(TeamModel, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["-created"]
@@ -21,6 +25,8 @@ class DetailedPurchase(DateModel):
     productName = models.CharField(max_length=200)
     amount = models.FloatField(default=1)
     price = models.FloatField()
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    team = models.ForeignKey(TeamModel, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ["-created"]

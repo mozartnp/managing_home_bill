@@ -38,6 +38,8 @@
                             
                         {% endfor %}
                         {{ form.errors }}
+                        <input type="hidden" name="user" value="{{ request.user.pk }}" id="id_user" />
+                        <input type="hidden" name="team" value="{{ request.user.team.all.first.pk }}" id="id_team" /> <!-- TODO qual time -->
                         <div class="col-sm-5">
                             <button class="mt-2 w-100 btn btn-outline-success" type="submit">Salvar Compra</button>
                         </div>

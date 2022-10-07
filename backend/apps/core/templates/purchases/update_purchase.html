@@ -18,12 +18,13 @@
     <div id="conteudo">
         <div class="container-fluid">
             <div class="container">
-
+                {% if object.isDetailedPurchase == True %}
                 <section class="row justify-content-start" >
                     <div class="offset-sm-4 col-sm-4">
                         <a class=" mb-2 w-100 btn btn-outline-primary" href="{% url 'core:listing_detailed_purchase' object.pk %}" role="button">Lista de produtos</a>
                     </div>
                 </section>
+                {% endif %}
         
                 <section>
                     <h2 class="text-center"> Edição da Compra: {{ object.purchaseName }}</h2>
