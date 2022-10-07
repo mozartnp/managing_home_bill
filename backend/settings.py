@@ -29,7 +29,7 @@ INSTALLED_APPS = [
 
     # System Apps
     'backend.apps.core',
-    'backend.apps.customUser',
+    'backend.apps.custom_user',
     'backend.apps.purchases',
 ]
 
@@ -116,5 +116,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default model of User
-AUTH_USER_MODEL = 'customUser.CustomUserModels'
+AUTH_USER_MODEL = 'custom_user.CustomUserModels'
 LOGIN_REDIRECT_URL = reverse_lazy('core:dashboard')

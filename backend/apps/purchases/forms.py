@@ -1,7 +1,7 @@
 from django import forms
 
 from backend.apps.purchases.models import DetailedPurchase, Purchase
-from backend.apps.customUser.models import CustomUserModels, TeamModel
+from backend.apps.custom_user.models import CustomUserModels, TeamModel
 
 class AddingPurchaseForms(forms.ModelForm):
     user = forms.ModelChoiceField(queryset=CustomUserModels.objects.all(), widget=forms.HiddenInput())

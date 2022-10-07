@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from backend.apps.customUser.models import TeamModel
+from backend.apps.custom_user.models import TeamModel
 from backend.apps.core.models import DateModel
 
 class Purchase(DateModel):
