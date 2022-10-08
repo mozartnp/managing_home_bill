@@ -1,0 +1,49 @@
+<!--Para avisar que a pagina é uma extenção da base.html-->
+{% extends 'base.html' %}
+
+<!--Para carregar os arquivos estaticos na pagina.-->
+{% load static %}
+
+<!--Para carregar o widget tweaks na pagina.-->
+{% load widget_tweaks %}
+
+<!--Bloco que define o titulo na pagina-->
+{% block title %}Definindo o Grupo{% endblock %}
+
+<!--Bloco que define o estilos extra na pagina-->
+{% block extra_style %}
+<link rel="stylesheet" href="{% static '/style/login_style.css' %}"/>
+{% endblock %}
+
+<!--Para indicar qual bloco será inserida no base.html-->
+{% block content %}
+
+<main>
+
+    <div class="container min-vh-100 ">
+
+        <section class ="card-login">
+            <div class="card-light card-login-in shadow-lg rounded p-4 text-center">
+                <h4>Escolha o seu grupo</h4>
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Grupos
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        {% for object in object_list %}
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    {{ object.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a class="mt-5 btn btn-outline-danger" href="{% url 'core:logout_custom' %}">Logout</a>
+        </section>
+
+    </div>
+
+</main>
+
+{% endblock %}

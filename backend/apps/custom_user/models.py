@@ -15,6 +15,11 @@ class CustomUserManager(BaseUserManager):
     '''
     Class to create a user
     '''
+    def create_personal_team(self, user):
+        team = TeamModel.objects.create(name=f"{user.full_name} personal team")
+        user.team.add(team)
+        user.save()
+
     def create_user(self, email, full_name, password=None):
         if not email:
             raise ValueError("E-mail is required.")
@@ -29,6 +34,7 @@ class CustomUserManager(BaseUserManager):
         user.set_password(password)
 
         user.save(using=self._db)
+        self.create_personal_team(user)
         return user
 
     def create_superuser(self, email, full_name, password):
