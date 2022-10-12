@@ -29,7 +29,7 @@ class TeamChoiceListView(ListView):
 
 class TeamSelectRedirectView(RedirectView):
     """
-        Class View to set team on session
+        Class View to set team on sessions
     """
     url = reverse_lazy('core:dashboard')
 

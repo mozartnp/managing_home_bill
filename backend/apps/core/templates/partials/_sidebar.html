@@ -8,8 +8,20 @@
 
     <nav>
         <div id="sideBar" class="sidenav open">
-
+            
             <div class="container-fluid">
+
+                <a class="collapse-choice" data-bs-toggle="collapse" href="#collapseTeam" aria-expanded="false"
+                    aria-controls="collapseTeam">
+                    <h6>Grupo atual: {{ team.name }}</h6>
+                </a>
+                {% for object in request.user.team.all %}
+                <div class="collapse" id="collapseTeam">
+                    <a class="collapse-option" href="{% url 'core:team_select' object.pk %}">{{ object.name }}</a>
+                </div>
+                {% endfor %}
+                <hr>
+
                 <a class="collapse-choice" href="{% url 'core:dashboard' %}">Dashboard</a>
                 
                 <a class="collapse-choice" data-bs-toggle="collapse" href="#collapsePurchases" aria-expanded="false"
@@ -18,12 +30,11 @@
                 </a>
                 <div class="collapse" id="collapsePurchases">
                     <a class="collapse-option" href="{% url 'core:adding_purchase' %}">Nova Compra</a>
-                    <hr>
                 </div>
                 <div class="collapse" id="collapsePurchases">
                     <a class="collapse-option" href="{% url 'core:listing_purchase' %}">Todas Compras</a>
-                    <hr>
                 </div>
+                <div class="collapse" id="collapsePurchases"><hr></div>
 
                 <a class="collapse-choice" href="{% url 'core:logout_custom' %}">Logout</a>
 
