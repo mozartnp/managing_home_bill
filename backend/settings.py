@@ -117,4 +117,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Default model of User
 AUTH_USER_MODEL = 'custom_user.CustomUserModels'
-LOGIN_REDIRECT_URL = reverse_lazy('core:dashboard')
+LOGIN_REDIRECT_URL = reverse_lazy('core:team_choice')
