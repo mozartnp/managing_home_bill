@@ -2,11 +2,11 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
 from django.urls import reverse_lazy, reverse
 
-from backend.apps.core.mixins import LoginRequiredCustomMixin
+from backend.apps.core.mixins import LoginRequiredCustomMixin, TeamMixin
 from backend.apps.purchases.models import DetailedPurchase, Purchase
 from backend.apps.purchases.forms import AddingPurchaseForms, UpdatePurchaseForms, AddingDetailedPurchaseForms, UpdateDetailedPurchaseForms
 
-class AddingPurchaseCreateView(LoginRequiredCustomMixin, CreateView):
+class AddingPurchaseCreateView(LoginRequiredCustomMixin, TeamMixin, CreateView):
     """
     Class View to create a new Purchase
     """
@@ -20,7 +20,7 @@ class AddingPurchaseCreateView(LoginRequiredCustomMixin, CreateView):
                 return reverse('core:listing_detailed_purchase', kwargs={"pk" : self.object.pk})
         return reverse_lazy('core:listing_purchase')
 
-class ListingPurchasesListView(LoginRequiredCustomMixin, ListView):
+class ListingPurchasesListView(LoginRequiredCustomMixin, TeamMixin, ListView):
     """
     Class View to listing all Purchases
     """
@@ -28,7 +28,7 @@ class ListingPurchasesListView(LoginRequiredCustomMixin, ListView):
     template_name = 'purchases/listing_purchases.html'
     paginate_by = 10
 
-class UpdatePurchaseUpdateView(LoginRequiredCustomMixin, UpdateView):
+class UpdatePurchaseUpdateView(LoginRequiredCustomMixin, TeamMixin, UpdateView):
     """
     Class View to update a Purchase
     """
@@ -37,7 +37,7 @@ class UpdatePurchaseUpdateView(LoginRequiredCustomMixin, UpdateView):
     form_class = UpdatePurchaseForms
     success_url = reverse_lazy('core:listing_purchase')
 
-class AddingDetailedPurchaseCreateView(LoginRequiredCustomMixin, CreateView):
+class AddingDetailedPurchaseCreateView(LoginRequiredCustomMixin, TeamMixin, CreateView):
     """
     Class View to create a new Detailed Purchase
     """
@@ -53,7 +53,7 @@ class AddingDetailedPurchaseCreateView(LoginRequiredCustomMixin, CreateView):
         context['purchase_pk'] = self.kwargs['pk']
         return context
 
-class ListingDetailedPurchasesListView(LoginRequiredCustomMixin, ListView):
+class ListingDetailedPurchasesListView(LoginRequiredCustomMixin, TeamMixin, ListView):
     """
     Class View to listing all Detailed Purchases
     """
@@ -70,7 +70,7 @@ class ListingDetailedPurchasesListView(LoginRequiredCustomMixin, ListView):
         self.purchase = get_object_or_404(Purchase, pk=self.kwargs['pk'])
         return DetailedPurchase.objects.filter(purchase=self.purchase)
 
-class UpdateDetailedPurchaseUpdateView(LoginRequiredCustomMixin, UpdateView):
+class UpdateDetailedPurchaseUpdateView(LoginRequiredCustomMixin, TeamMixin, UpdateView):
     """
     Class View to update a Detailed Purchase
     """
