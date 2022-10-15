@@ -14,6 +14,14 @@ class AddingPurchaseCreateView(LoginRequiredCustomMixin, TeamMixin, CreateView):
     template_name = 'purchases/adding_purchase.html'
     form_class = AddingPurchaseForms
 
+    def form_valid(self, form, **kwargs):
+        context = self.get_context_data(**kwargs)
+        purchase = form.save(commit=False)
+        purchase.team = context['team']
+        purchase.user = self.request.user
+        purchase.save()
+        return super().form_valid(form)
+
     def get_success_url(self):
         if self.request.method == "POST":
             if self.request.POST.get('isDetailedPurchase') == 'on':
@@ -44,6 +52,15 @@ class AddingDetailedPurchaseCreateView(LoginRequiredCustomMixin, TeamMixin, Crea
     model = DetailedPurchase
     template_name = 'purchases/adding_detailed_purchase.html'
     form_class = AddingDetailedPurchaseForms
+
+    def form_valid(self, form, **kwargs):
+        context = self.get_context_data(**kwargs)
+        purchaseDetailed = form.save(commit=False)
+        purchaseDetailed.team = context['team']
+        purchaseDetailed.user = self.request.user
+        purchaseDetailed.purchase = Purchase.objects.filter(pk=context['purchase_pk']).first()
+        purchaseDetailed.save()
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('core:listing_detailed_purchase', kwargs={"pk" : self.kwargs['pk']})

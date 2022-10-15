@@ -1,11 +1,8 @@
 from django import forms
 
 from backend.apps.purchases.models import DetailedPurchase, Purchase
-from backend.apps.custom_user.models import CustomUserModels, TeamModel
 
 class AddingPurchaseForms(forms.ModelForm):
-    user = forms.ModelChoiceField(queryset=CustomUserModels.objects.all(), widget=forms.HiddenInput())
-    team = forms.ModelChoiceField(queryset=TeamModel.objects.all(), widget=forms.HiddenInput()) 
 
     class Meta:
         model = Purchase
@@ -16,9 +13,7 @@ class AddingPurchaseForms(forms.ModelForm):
             'isDetailedPurchase',
             'purchaseValue',
             'typePayment',
-            'note',
-            'user',
-            'team'
+            'note'
         ]
         labels = {
             'purchaseName' : 'Compra',
@@ -84,9 +79,6 @@ class UpdatePurchaseForms(forms.ModelForm):
         self.fields['note'].required = False
 
 class AddingDetailedPurchaseForms(forms.ModelForm):
-    purchase = forms.ModelChoiceField(queryset=Purchase.objects.all(), widget=forms.HiddenInput())
-    user = forms.ModelChoiceField(queryset=CustomUserModels.objects.all(), widget=forms.HiddenInput())
-    team = forms.ModelChoiceField(queryset=TeamModel.objects.all(), widget=forms.HiddenInput()) 
 
     class Meta:
         model = DetailedPurchase
@@ -94,10 +86,7 @@ class AddingDetailedPurchaseForms(forms.ModelForm):
         fields = [
             'productName',
             'amount',
-            'price',
-            'purchase', #TODO ? Preciso do campo que está como hiddeninput aqui?
-            'user',
-            'team'
+            'price'
         ]
         labels = {
             'productName' : 'Nome do Produto',
